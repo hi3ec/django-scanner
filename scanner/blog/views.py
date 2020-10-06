@@ -3,10 +3,5 @@ from django.shortcuts import render
 
 # Create your views here.
 def home(request):
-    context = {
-        'username': 'amir',
-        'age':22,
-        'job':'it',
-    }
-    return render(request, 'blog/home.html', context)
 
+    return render(request, 'blog/index.html')
