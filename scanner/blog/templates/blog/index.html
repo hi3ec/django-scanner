@@ -153,6 +153,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table mr-1"></i>
@@ -182,24 +183,17 @@
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>AA:BB:CC:DD:EE:FF</td>
-                                                <td>192.168.2.3</td>
-                                                <td>Windows8.1</td>
-                                                <td>2020/11/25</td>
-                                                <td>2020/11/25</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>AA:BB:CC:DD:EE:FF</td>
-                                                <td>192.168.2.1</td>
-                                                <td>Windows10</td>
-                                                <td>2020/12/15</td>
-                                                <td>2020/12/20</td>
-                                            </tr>
-                             
-                                
+                                            {% for device in Devices %}
+                                                <tr>
+                                                    <td>{{device.read_database}}</td>
+                                                    <td>{{device.mac_address}}</td>
+                                                    <td>{{device.ip_address}}</td>
+                                                    <td>null</td>
+                                                    <td>{{device.first_time}}</td>
+                                                    <td>2020/11/25</td>
+                                                </tr>
+                                                                            
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>

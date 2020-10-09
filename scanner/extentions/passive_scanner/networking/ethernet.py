@@ -2,7 +2,6 @@ import socket
 import struct
 from general import *
 
-
 class Ethernet:
 
     def __init__(self, raw_data):

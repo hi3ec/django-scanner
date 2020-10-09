@@ -1,15 +1,18 @@
+#! /usr/bin/env python
+
 import subprocess
+import sys
+import re
 import netifaces
 import socket
 import time
-
 from time import gmtime, strftime
 from IPy import IP
-from database import readSqliteTable
-from general import get_mac_addr, format_multi_line
+from database import WriteToSqlite
 from networking.ethernet import Ethernet
 from networking.ipv4 import IPv4
 from networking.pcap import Pcap
+
 
 
 def main():
@@ -46,7 +49,7 @@ def passive_scan():
 
     while True:
         try:
-            raw_data = conn.recvfrom(65535)
+            raw_data , addr= conn.recvfrom(65535)
             pcap.write(raw_data)
             eth = Ethernet(raw_data)
 
@@ -62,11 +65,12 @@ def passive_scan():
                             #print(TAB_1 + 'IPv4 Packet:')
                             #print(TAB_2 + 'Version: {}, Header Length: {}, TTL: {},'.format(ipv4.version, ipv4.header_length, ipv4.ttl))
                             #print(TAB_2 + 'Protocol: {}, Source: {}, Target: {}'.format(ipv4.proto, ipv4.src, ipv4.target))
-                            readSqliteTable(eth.src_mac, ipv4.src)
+                            WriteToSqlite(eth.src_mac, ipv4.src)
         except KeyboardInterrupt:
-            readSqliteTable(eth.src_mac, ipv4.src)
+            WriteToSqlite(eth.src_mac, ipv4.src)
             time.sleep(5)
             print('>>>>>>>>>>>>>>>>>>>>>>>.save file.<<<<<<<<<<<<<<<<<<<<<<<<<<<<,,,')
             break
     pcap.close()
-main()
+
+passive_scan()

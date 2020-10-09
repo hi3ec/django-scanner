@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 import sqlite3
 import datetime
 
@@ -13,9 +14,7 @@ def checkMAC(records,mac_address):
             return True
     return False
 
-
-
-def readSqliteTable(mac_address,ip_address):
+def WriteToSqlite(mac_address,ip_address):
     try:
         sqliteConnection = sqlite3.connect('db.sqlite')
         cursor = sqliteConnection.cursor()
@@ -38,3 +37,23 @@ def readSqliteTable(mac_address,ip_address):
             sqliteConnection.close()
             print("The SQLite connection is closed")
 
+def readSqliteTable():
+    try:
+        sqliteConnection = sqlite3.connect('db.sqlite')
+        cursor = sqliteConnection.cursor()
+        sqlite_select_query = """SELECT * from DEVICEs"""
+        cursor.execute(sqlite_select_query)
+        records = cursor.fetchall()
+        
+        print(records)
+        print("Total rows are:  ", len(records))
+   
+       
+    except sqlite3.Error as error:
+        print("Failed to read data from sqlite table", error)
+
+    finally:
+        if (sqliteConnection):
+            sqliteConnection.close()
+            print("The SQLite connection is closed")
+            return(records)
