@@ -5,6 +5,6 @@ from .models import Devices
 # Create your views here.
 def home(request):
     context = {
-        "devices": Devices.objects.all()
+        "Devices": Devices.objects.all()
     }
     return render(request, 'blog/index.html', context)

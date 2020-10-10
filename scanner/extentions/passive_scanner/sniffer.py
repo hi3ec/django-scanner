@@ -65,12 +65,12 @@ def passive_scan():
                             #print(TAB_1 + 'IPv4 Packet:')
                             #print(TAB_2 + 'Version: {}, Header Length: {}, TTL: {},'.format(ipv4.version, ipv4.header_length, ipv4.ttl))
                             #print(TAB_2 + 'Protocol: {}, Source: {}, Target: {}'.format(ipv4.proto, ipv4.src, ipv4.target))
-                            WriteToSqlite(eth.src_mac, ipv4.src)
+                            WriteToSqlite(eth.src_mac, ipv4.src, 'windows')
         except KeyboardInterrupt:
-            WriteToSqlite(eth.src_mac, ipv4.src)
+            WriteToSqlite(eth.src_mac, ipv4.src, 'windows')
             time.sleep(5)
             print('>>>>>>>>>>>>>>>>>>>>>>>.save file.<<<<<<<<<<<<<<<<<<<<<<<<<<<<,,,')
             break
     pcap.close()
 
-passive_scan()
+main()

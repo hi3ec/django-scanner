@@ -4,29 +4,33 @@ import datetime
 
 def checkMAC(records,mac_address):
     print("Total rows are:  ", len(records))
+
     for row in records:
-        print("MAC_Address: ", row[0]) 
-        print("IP_Address: ", row[1])
-        print("Date: ", row[2])
+        print("MAC_Address: ", row[1]) 
+        print("IP_Address: ", row[2])
+        print("Date: ", row[4])
         print("\n")
-        if row[0] == mac_address:
+        if row[1] == mac_address:
             print('find device')
             return True
     return False
 
-def WriteToSqlite(mac_address,ip_address):
+def WriteToSqlite(mac_address,ip_address,os):
     try:
-        sqliteConnection = sqlite3.connect('db.sqlite')
+        sqliteConnection = sqlite3.connect('../../db.sqlite3')
         cursor = sqliteConnection.cursor()
-        data = (mac_address, ip_address, datetime.datetime.now())
-        cursor.execute('create table if not exists DEVICEs(mac text, ip text, date date)')
-        sqlite_select_query = """SELECT * from DEVICEs"""
+        #cursor.execute('create table if not exists blog_devices(mac text, ip text, date date)')
+        sqlite_select_query = """SELECT * from blog_devices"""
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
         check_mac = checkMAC(records,mac_address)
 
         if check_mac is False:
-            cursor.execute("INSERT INTO devices VALUES(?, ?, ?)", data)
+            add_device = ("INSERT INTO blog_devices "
+                "(mac_address, ip_address, os, first_time, last_time) "
+                "VALUES (?, ?, ?, ?, ?)")
+            data_device = (mac_address, ip_address, os, datetime.datetime.now(), datetime.datetime.now())
+            cursor.execute(add_device, data_device)
             sqliteConnection.commit()
 
     except sqlite3.Error as error:
@@ -39,9 +43,9 @@ def WriteToSqlite(mac_address,ip_address):
 
 def readSqliteTable():
     try:
-        sqliteConnection = sqlite3.connect('db.sqlite')
+        sqliteConnection = sqlite3.connect('../../db.sqlite3')
         cursor = sqliteConnection.cursor()
-        sqlite_select_query = """SELECT * from DEVICEs"""
+        sqlite_select_query = """SELECT * from blog_devices"""
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
         

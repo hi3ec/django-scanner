@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 #from extentions.passive_scanner.sniffer import main
-from extentions.passive_scanner.database import readSqliteTable
+#from extentions.passive_scanner.database import readSqliteTable
 
 # Create your models here.
 class Devices(models.Model):
@@ -11,6 +11,6 @@ class Devices(models.Model):
     first_time = models.DateTimeField(auto_now=True)
     last_time = models.DateTimeField(auto_now=True)
 
-    def read_database(self):
-        return readSqliteTable()
+#    def read_database(self):
+#        return readSqliteTable()
          
