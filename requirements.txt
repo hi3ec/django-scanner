@@ -32,7 +32,7 @@ filelock==3.0.12
 future==0.18.2
 gpg===1.13.1-unknown
 html5lib==1.0.1
-httplib2==0.14.0
+httplib2>=0.18.0
 idna==2.8
 imagesize==1.2.0
 importlib-metadata==1.5.0
@@ -77,7 +77,7 @@ pbr==5.5.0
 pep517==0.8.2
 pexpect==4.6.0
 pickleshare==0.7.5
-Pillow==7.0.0
+Pillow>=7.1.0
 progress==1.5
 prompt-toolkit==3.0.7
 protobuf==3.6.1
