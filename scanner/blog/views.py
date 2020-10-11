@@ -15,9 +15,6 @@ def dashboard(request):
     }
     return render(request, 'blog/index.html', context)
 
-def login(request):
-    return render(request, 'blog/login.html')
-
 def tables(request):
     context = {
             "Devices": Devices.objects.all()
