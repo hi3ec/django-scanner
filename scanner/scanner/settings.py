@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'extentions',
-    'authentication.apps.AuthenticationConfig',
 
 ]
 
@@ -122,11 +121,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-"""
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home' # new
-
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
-
-"""
